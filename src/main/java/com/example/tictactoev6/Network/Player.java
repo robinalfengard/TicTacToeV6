@@ -1,5 +1,4 @@
-package com.example.tictactoev5;
-import javafx.scene.image.Image;
+package com.example.tictactoev6.Network;
 import java.net.Socket;
 
 
