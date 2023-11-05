@@ -49,16 +49,16 @@ public class Server {
                         // Input from player 1
 
                         String messageFromPlayer1 = player1In.readLine();
-                        System.out.println("User1: " + messageFromPlayer1);
-                        player2Out.println("User 1 says: " + messageFromPlayer1);
+                        System.out.println("User1 pressed box: " + messageFromPlayer1);
+                        player2Out.println(messageFromPlayer1);
 
 
                         // Process and handle player 1's move (e.g., update game state)
 
                         // Input from player 2
                         String messageFromPlayer2 = player2In.readLine();
-                        System.out.println("User2: " + messageFromPlayer2);
-                        player1Out.println("User 2 says: " + messageFromPlayer2);
+                        System.out.println("User2 pressed: " + messageFromPlayer2);
+                        player1Out.println(messageFromPlayer2);
 
                         // Process and handle player 2's move (e.g., update game state)
 

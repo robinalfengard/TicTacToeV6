@@ -1,6 +1,7 @@
 package com.example.tictactoev6.Network;
 import com.example.tictactoev6.Model;
 import javafx.application.Platform;
+import javafx.scene.canvas.Canvas;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -32,7 +33,8 @@ public class Client {
                         }
                         // Handle the received message
                             System.out.println("incoming message from client: " + message);
-                            Platform.runLater(() -> model.updateGui(message));
+                           /* Platform.runLater(() -> model.updateGui(message));*/
+                            Platform.runLater(() -> model.MakeOpponentMove(message));
 
 
 
@@ -47,9 +49,16 @@ public class Client {
         }
     }
 
-    public void sendMessage(String message) {
+/*    public void sendMessage(String message) {
         if (out != null) {
             out.println(message); // Send the message to the server
+            out.flush();
+        }
+    }*/
+
+    public void MakeMove(String boxClicked) {
+        if (out != null) {
+            out.println(boxClicked); // Send the message to the server
             out.flush();
         }
     }
