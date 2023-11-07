@@ -4,13 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="14e132f8-3c40-40d3-b326-3654f1334b6e" name="Changes" comment="init">
+    <list default="true" id="14e132f8-3c40-40d3-b326-3654f1334b6e" name="Changes" comment="can now send moves between clients. Slow and buggy though">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/tictactoev6/FactoryMethods.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/tictactoev6/GameLogic.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tictactoev6/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tictactoev6/App.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tictactoev6/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tictactoev6/Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tictactoev6/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tictactoev6/Model.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tictactoev6/Network/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tictactoev6/Network/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tictactoev6/Network/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tictactoev6/Network/Server.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/tictactoev6/View.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/tictactoev6/View.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -37,13 +38,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true"
+  },
+  "keyToStringList": {
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "JAVA"
+    ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.example.tictactoev6.Network" />
@@ -76,14 +82,23 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Scratch" type="Java Scratch" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Scratch" />
+      <option name="SCRATCH_FILE_URL" value="file://$APPLICATION_CONFIG_DIR$/scratches/scratch_1.java" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <list>
       <item itemvalue="Application.App" />
       <item itemvalue="Application.Server" />
+      <item itemvalue="Java Scratch.Scratch" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.App" />
         <item itemvalue="Application.Server" />
+        <item itemvalue="Java Scratch.Scratch" />
       </list>
     </recent_temporary>
   </component>
@@ -103,12 +118,20 @@
       <option name="presentableId" value="LOCAL−00001" />
       <updated>1699204502559</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL−00002" summary="can now send moves between clients. Slow and buggy though">
+      <option name="closed" value="true" />
+      <created>1699212422541</created>
+      <option name="number" value="LOCAL−00002" />
+      <option name="presentableId" value="LOCAL−00002" />
+      <updated>1699212422542</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="init" />
-    <option name="LAST_COMMIT_MESSAGE" value="init" />
+    <MESSAGE value="can now send moves between clients. Slow and buggy though" />
+    <option name="LAST_COMMIT_MESSAGE" value="can now send moves between clients. Slow and buggy though" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/TicTacToeV6$App.ic" NAME="App Coverage Results" MODIFIED="1699196787880" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

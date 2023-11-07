@@ -19,7 +19,7 @@
     <Label fx:id="messageReceived"/>
     <Button text="Go Online!" onAction="#goOnline"/>
     <TextField fx:id="messageToSend" text="Write Something"/>
-    <Button fx:id="send" text="Send" userData="" onAction="#sendMessage"/>
+    <Button fx:id="send" text="Send" userData=""/>
 
 
     <top>
