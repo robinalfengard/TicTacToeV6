@@ -24,11 +24,11 @@
 
     <top>
         <VBox alignment="CENTER" maxHeight="150" minHeight="123.0" prefHeight="123.0" prefWidth="723.0">
-            <Label style="-fx-font-size: 40px;" text="Tic Tac At Hogwarts!" textAlignment="CENTER" textFill="#4d3939" textOverrun="WORD_ELLIPSIS" />
-
-
-            <Label text="Player info"/>
+            <Label style="-fx-font-size: 40px;" text="Tic Tac Toe Online!" textAlignment="CENTER" textFill="#4d3939" textOverrun="WORD_ELLIPSIS" />
             <Button onAction="#goOnline" text="Play Online?"/>
+
+            <Label style="-fx-font-size: 20px;" text="You are the color blue!" textAlignment="CENTER" textFill="#4d3939" textOverrun="WORD_ELLIPSIS" />
+
         </VBox>
     </top>
 
@@ -119,7 +119,7 @@
         <VBox alignment="TOP_CENTER">
             <HBox alignment="CENTER" maxHeight="100" maxWidth="800.0" minHeight="60.0" minWidth="800.0" prefHeight="60.0" prefWidth="800.0" spacing="10">
 
-                <Label fx:id="winningMessage" style="-fx-font-size: 30px;" text="" />
+                <Label fx:id="winningMessage" style="-fx-font-size: 20px;" text="" />
             </HBox>
             <HBox alignment="CENTER" maxHeight="100" minHeight="100">
 

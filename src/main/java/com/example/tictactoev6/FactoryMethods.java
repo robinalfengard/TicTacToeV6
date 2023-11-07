@@ -1,5 +1,6 @@
 package com.example.tictactoev6;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FactoryMethods {
@@ -19,5 +20,19 @@ public class FactoryMethods {
                 List.of("box1", "box5", "box9"),
                 List.of("box3", "box5", "box7")
         );
+    }
+
+    public List<String> getAvailableMoves() {
+        List<String> availableMoves = new ArrayList<>();
+        availableMoves.add("box1");
+        availableMoves.add("box2");
+        availableMoves.add("box3");
+        availableMoves.add("box4");
+        availableMoves.add("box5");
+        availableMoves.add("box6");
+        availableMoves.add("box7");
+        availableMoves.add("box8");
+        availableMoves.add("box9");
+        return availableMoves;
     }
 }

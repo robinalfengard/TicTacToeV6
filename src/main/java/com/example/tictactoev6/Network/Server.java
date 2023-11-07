@@ -1,5 +1,7 @@
 package com.example.tictactoev6.Network;
 
+import com.example.tictactoev6.Model;
+
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -12,10 +14,12 @@ public class Server {
     // Send messages to clients
     private BufferedWriter bufferedWriter;
 
+
+
+
     public static void main(String[] args) {
         new Server().startServer();
     }
-
 
 
     public void startServer() {

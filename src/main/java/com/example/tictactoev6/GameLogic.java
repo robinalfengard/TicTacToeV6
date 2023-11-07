@@ -7,12 +7,13 @@ import java.util.Map;
 public class GameLogic {
     FactoryMethods factoryMethods =  new FactoryMethods();
 
-    public boolean isMoveValid(String move, Map<String, Canvas> possibleMoves)  {
-        return possibleMoves.get(move).getId().equals(move);
+    public boolean isMoveValid(String move, Map<String, Canvas> possibleMoves, List<String> copyOfMoves)  {
+        String moveToTry = possibleMoves.get(move).getId();
+        return copyOfMoves.contains(moveToTry);
     }
 
-    public void removeMove(String move, Map<String, Canvas> possibleMoves){
-        possibleMoves.remove(move);
+    public void removeMove(String move, List<String> availableMoves){
+        availableMoves.remove(move);
     }
 
     public boolean winCheck(List<String> movesToCheck) {

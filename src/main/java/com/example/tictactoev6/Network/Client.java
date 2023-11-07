@@ -29,12 +29,11 @@ public class Client {
                             // Connection closed by the server or an error occurred
                             break;
                         }
-                        // Handle the received message
+                        if(message.equals("reset")){
+                            Platform.runLater(() -> model.resetRequest(message));
+                        }
                             System.out.println("incoming box from client: " + message);
                             Platform.runLater(() -> model.MakeOpponentMove(message));
-
-
-
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -47,9 +46,17 @@ public class Client {
     }
 
 
-    public void MakeMove(String boxClicked) {
+    public void makeMove(String boxClicked) {
         if (out != null) {
             out.println(boxClicked); // Send the message to the server
+            out.flush();
+        }
+    }
+
+    public void requestReset(String reset) {
+        System.out.println("message from client " + reset);
+        if(out != null){
+            out.println(reset);
             out.flush();
         }
     }

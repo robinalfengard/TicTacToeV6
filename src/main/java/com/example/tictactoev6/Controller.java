@@ -54,31 +54,35 @@ public class Controller implements Initializable {
         model.setBoxMap(boxMap);
         winningMessage.textProperty().bind(model.winningMessageProperty());
         opponentScorePrintout.textProperty().bind(model.opponentScorePrintoutProperty());
-        yourScorePrintout.textProperty().bind(model.yourScorePrintoutProperty());
+        yourScorePrintout.textProperty().bind(model.userScorePrintoutProperty());
+    }
+
+    public Model getModel(){
+        return model;
     }
 
     public void goOnline(ActionEvent actionEvent) {
         client.connect();
     }
 
-
-    public Model getModel(){
-        return model;
-    }
-
-
     public void boxClicked(MouseEvent event) {
         Canvas boxClicked = (Canvas) event.getSource();
         String boxId = boxClicked.getId();
-        client.MakeMove(boxId);
+        client.makeMove(boxId);
         model.makeMove(boxId);
     }
 
-    public void playAgain(ActionEvent actionEvent) {
 
+    public void playAgain(ActionEvent actionEvent) {
+        client.requestReset("reset");
+        model.playAgain();
     }
 
     public void resetScore(ActionEvent actionEvent) {
         model.resetScore();
     }
+
+
+
+
 }
