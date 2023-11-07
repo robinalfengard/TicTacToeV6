@@ -30,7 +30,7 @@ public class Client {
                             break;
                         }
                         // Handle the received message
-                            System.out.println("incoming message from client: " + message);
+                            System.out.println("incoming box from client: " + message);
                             Platform.runLater(() -> model.MakeOpponentMove(message));
 
 

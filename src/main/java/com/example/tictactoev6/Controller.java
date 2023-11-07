@@ -30,6 +30,9 @@ public class Controller implements Initializable {
     public Canvas box7;
     public Canvas box8;
     public Canvas box9;
+    public Label winningMessage;
+    public Label opponentScorePrintout;
+    public Label yourScorePrintout;
     private Model model;
     Client client;
     private final Map<String, Canvas> boxMap = new HashMap<>();
@@ -49,6 +52,9 @@ public class Controller implements Initializable {
         boxMap.put("box9", box9);
         model.setBoxMap(boxMap);
         model.setBoxMap(boxMap);
+        winningMessage.textProperty().bind(model.winningMessageProperty());
+        opponentScorePrintout.textProperty().bind(model.opponentScorePrintoutProperty());
+        yourScorePrintout.textProperty().bind(model.yourScorePrintoutProperty());
     }
 
     public void goOnline(ActionEvent actionEvent) {
@@ -73,5 +79,6 @@ public class Controller implements Initializable {
     }
 
     public void resetScore(ActionEvent actionEvent) {
+        model.resetScore();
     }
 }
