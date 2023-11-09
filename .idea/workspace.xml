@@ -4,16 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="14e132f8-3c40-40d3-b326-3654f1334b6e" name="Changes" comment="sending resetRequest, need to set order">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/tictactoev6/Network/PlayerHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tictactoev6/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tictactoev6/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tictactoev6/GameLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tictactoev6/GameLogic.java" afterDir="false" />
+    <list default="true" id="14e132f8-3c40-40d3-b326-3654f1334b6e" name="Changes" comment="turn based now works">
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tictactoev6/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tictactoev6/Model.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tictactoev6/Network/Client.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tictactoev6/Network/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tictactoev6/Network/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tictactoev6/Network/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tictactoev6/Network/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/tictactoev6/View.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/tictactoev6/View.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -141,7 +133,14 @@
       <option name="presentableId" value="LOCAL−00004" />
       <updated>1699354293417</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL−00005" summary="turn based now works">
+      <option name="closed" value="true" />
+      <created>1699553750644</created>
+      <option name="number" value="LOCAL−00005" />
+      <option name="presentableId" value="LOCAL−00005" />
+      <updated>1699553750644</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -149,7 +148,8 @@
     <MESSAGE value="can now send moves between clients. Slow and buggy though" />
     <MESSAGE value="moves can be sent, + winLogic" />
     <MESSAGE value="win messages + win count + compressed methods in model" />
-    <option name="LAST_COMMIT_MESSAGE" value="win messages + win count + compressed methods in model" />
+    <MESSAGE value="turn based now works" />
+    <option name="LAST_COMMIT_MESSAGE" value="turn based now works" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/TicTacToeV6$App.ic" NAME="App Coverage Results" MODIFIED="1699196787880" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

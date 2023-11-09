@@ -20,22 +20,20 @@
             <Label style="-fx-font-size: 40px;" text="Tic Tac Toe Online!" textAlignment="CENTER" textFill="#4d3939" textOverrun="WORD_ELLIPSIS" />
             <Button onAction="#goOnline" text="Play Online?"/>
             <Button onAction="#startServer" text="Start Server"/>
-
-
-            <Label style="-fx-font-size: 20px;" text="You are the color blue!" textAlignment="CENTER" textFill="#4d3939" textOverrun="WORD_ELLIPSIS" />
-            <Label fx:id="isItYourTurn" />
-
+            <Label fx:id="isItYourTurn" style="-fx-font-size: 15px;" />
         </VBox>
     </top>
 
     <left>
         <VBox alignment="CENTER" maxHeight="385.0" maxWidth="175" minWidth="169.0" prefHeight="375.0" prefWidth="169.0" styleClass="points">
+            <Label text="Your Marker: Blue" style="-fx-font-size: 15px;"/>
             <Label fx:id="yourScorePrintout" style="-fx-font-size: 20px;" />
         </VBox>
     </left>
 
     <right>
         <VBox alignment="CENTER" maxHeight="385.0" maxWidth="175" minWidth="169.0" prefHeight="375.0" prefWidth="169.0" styleClass="points">
+            <Label text="Opponent Marker: Red" style="-fx-font-size: 15px;"/>
             <Label fx:id="opponentScorePrintout" style="-fx-font-size: 20px;"  />
         </VBox>
     </right>

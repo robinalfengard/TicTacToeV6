@@ -26,10 +26,8 @@ public class Model {
     private final BooleanProperty gameRunning = new SimpleBooleanProperty(true);
 
 
-
     public Model(){
         availableMoves = factoryMethods.getAvailableMoves();
-
     }
 
 
@@ -40,6 +38,7 @@ public class Model {
                     gameLogic.getUserMoves().add(boxId);
                     gameLogic.removeMove(boxId, availableMoves);
                     setIsItYourTurn(false);
+                    setTurnText();
                     System.out.println("Is it your turn after move: " + isIsItYourTurn());
                 } else{
                     System.out.println("Not valid");
@@ -55,6 +54,7 @@ public class Model {
             gameLogic.getOpponentMoves().add(boxReceived);
             gameLogic.removeMove(boxReceived, availableMoves);
             setIsItYourTurn(true);
+            setTurnText();
             System.out.println("Is it your turn after opponent move: " + isIsItYourTurn());
         }
             isGameOver();
@@ -105,6 +105,14 @@ public class Model {
 
     private void disableAllMoves() {
         availableMoves.clear();
+    }
+
+    private void setTurnText(){
+        if(isIsItYourTurn())
+            setIsItYourTurnPrintOut("It is your turn");
+        else{
+            setIsItYourTurnPrintOut("It is the opponents turn");
+        }
     }
 
 
