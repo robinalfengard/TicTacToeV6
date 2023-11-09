@@ -1,33 +1,81 @@
 package com.example.tictactoev6.Network;
+import com.example.tictactoev6.Model;
+import javafx.application.Platform;
+import java.io.*;
 import java.net.Socket;
 
-
 public class Player {
-    private int id;
+    private BufferedWriter bufferedWriter;
+    private BufferedReader bufferedReader;
     private Socket socket;
-
-    public Player(Socket socket, int playerId) {
-        this.socket = socket;
-        this.id = playerId;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    private final Model model;
+    public Player(Model model) throws IOException {
+        socket = new Socket("localhost", 6000);
+        this.bufferedWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+        this.bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        this.model = model;
     }
 
 
-
-    public Socket getSocket() {
-        return socket;
+    public void sendMessage(String message){
+        try{
+            if(message != null){
+                bufferedWriter.write(message);
+                bufferedWriter.newLine();
+                bufferedWriter.flush();
+                System.out.println(model.isIsItYourTurn());
+            }
+        }catch (IOException ex){
+            closeAll(socket, bufferedReader, bufferedWriter);
+        }
     }
 
-    public void setSocket(Socket socket) {
-        this.socket = socket;
+
+    public void listenForMessages(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String incommingMessage;
+                while(socket.isConnected()){
+                    try{
+                        incommingMessage = bufferedReader.readLine();
+                        if(incommingMessage != null) {
+                            String messageToSend = incommingMessage;
+                            System.out.println("incoming message: " + incommingMessage);
+                            if (incommingMessage.equals("resetGameBoard")){
+                                Platform.runLater(model::resetGameBoard);
+                            } else if (incommingMessage.equals("resetScore")) {
+                                Platform.runLater(model::resetScore);
+                            } else{
+                                Platform.runLater(() -> model.makeOpponentMove(messageToSend));
+                            }
+                        }
+                    } catch (IOException ex){
+                        closeAll(socket, bufferedReader, bufferedWriter);
+                    }
+                }
+            }
+        }).start();
     }
+
+    public void closeAll(Socket socket, BufferedReader bufferedReader, BufferedWriter bufferedWriter){
+        try{
+            if(bufferedReader != null)
+                bufferedReader.close();
+            if(bufferedWriter != null)
+                bufferedWriter.close();
+            if(socket != null)
+                socket.close();
+        }catch (IOException e){
+            e.printStackTrace();
+            System.out.println("Error from closeAll method");
+        }
+    }
+
+
+
+
+
 
 
 

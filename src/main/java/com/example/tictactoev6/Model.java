@@ -1,65 +1,76 @@
 package com.example.tictactoev6;
+import com.example.tictactoev6.Network.PlayerHandler;
 import javafx.application.Platform;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-
 import java.util.*;
 
 public class Model {
+    //todo visa vems tur det är, userWin blir just nu +2
     GameLogic gameLogic = new GameLogic();
     FactoryMethods factoryMethods = new FactoryMethods();
     private  Map<String, Canvas> boxMap;
-    // CHekca om det går att använda kopian för isValidMove och remove, då behöver jag bara måla om alla orginalcanvas till vit vid reset.
     private  List<String> availableMoves;
-    private final List<String> userMoves = new ArrayList<>();
-    private final List<String> opponentMoves = new ArrayList<>();
     private final StringProperty winningMessageProperty = new SimpleStringProperty();
     private  int opponentScore = 0;
     private final StringProperty opponentScorePrintout = new SimpleStringProperty("Opponent score: " + opponentScore);
     private  int userScore = 0;
     private final StringProperty userScorePrintout = new SimpleStringProperty("Your score: " + userScore);
+    private BooleanProperty isItYourTurn = new SimpleBooleanProperty(true);
+    private final StringProperty isItYourTurnPrintOut = new SimpleStringProperty("");
+    private final BooleanProperty gameRunning = new SimpleBooleanProperty(true);
+
 
 
     public Model(){
         availableMoves = factoryMethods.getAvailableMoves();
+
     }
 
 
     public void makeMove(String boxId) {
             Platform.runLater(() -> {
-                if (gameLogic.isMoveValid(boxId, boxMap, availableMoves)) {
+                if (gameLogic.isMoveValid(boxId, boxMap, availableMoves) && isIsItYourTurn()) {
                     boxSelector(boxId, Color.BLUE);
-                    userMoves.add(boxId);
+                    gameLogic.getUserMoves().add(boxId);
                     gameLogic.removeMove(boxId, availableMoves);
+                    setIsItYourTurn(false);
+                    System.out.println("Is it your turn after move: " + isIsItYourTurn());
+                } else{
+                    System.out.println("Not valid");
                 }
                 isGameOver();
             });
     }
 
-    public void MakeOpponentMove(String boxId) {
+    public void makeOpponentMove(String boxReceived) {
         Platform.runLater(() -> {
-                boxSelector(boxId, Color.RED);
-                opponentMoves.add(boxId);
-                gameLogic.removeMove(boxId, availableMoves);
+        if(gameLogic.isMoveValid(boxReceived, boxMap, availableMoves)) {
+            boxSelector(boxReceived, Color.RED);
+            gameLogic.getOpponentMoves().add(boxReceived);
+            gameLogic.removeMove(boxReceived, availableMoves);
+            setIsItYourTurn(true);
+            System.out.println("Is it your turn after opponent move: " + isIsItYourTurn());
+        }
             isGameOver();
         });
-
     }
 
-
-
     public void isGameOver() {
-        if (gameLogic.winCheck(opponentMoves)) {
+        if (gameLogic.winCheck(gameLogic.getOpponentMoves())) {
             opponentWin();
-            disableAllMoves();
-        } else if (gameLogic.winCheck(userMoves)) {
+            setGameRunning(false);
+        } else if (gameLogic.winCheck(gameLogic.getUserMoves())) {
             userWin();
-            disableAllMoves();
+            setGameRunning(false);
         } else if (boxMap.isEmpty()) {
             setWinningMessage("It's a tie!");
+            setGameRunning(false);
         }
     }
 
@@ -67,12 +78,14 @@ public class Model {
         setWinningMessage("You won!");
         userScore += 1;
         setUserScorePrintout("Your score: " + userScore);
+        disableAllMoves();
     }
 
     private void opponentWin() {
         setWinningMessage("Opponent won!");
         opponentScore +=1;
         setOpponentScorePrintout("Opponent score: " + opponentScore);
+        disableAllMoves();
     }
 
 
@@ -102,22 +115,9 @@ public class Model {
         setUserScorePrintout("Your score: " + userScore);
         resetGameBoard();
     }
-    public void playAgain() {
-        userMoves.clear();
-        opponentMoves.clear();
-        resetGameBoard();
-    }
-
-    public void resetRequest(String message) {
-        System.out.println(message + " received in model");
-        userMoves.clear();
-        opponentMoves.clear();
-        if(message.equals("reset"))
-            Platform.runLater(this::resetGameBoard);
-    }
 
 
-    private void resetGameBoard() {
+    public void resetGameBoard() {
         Platform.runLater(() -> {
             boxMap.forEach((box, canvas) -> {
                 GraphicsContext gc = canvas.getGraphicsContext2D();
@@ -128,9 +128,11 @@ public class Model {
                 gc.strokeRect(0, 0, canvas.getWidth(), canvas.getHeight());
             });
         });
+        gameLogic.getUserMoves().clear();
+        gameLogic.getOpponentMoves().clear();
         availableMoves = factoryMethods.getAvailableMoves();
+        setGameRunning(true);
     }
-
 
 
 
@@ -172,6 +174,36 @@ public class Model {
         this.opponentScorePrintout.set(opponentScorePrintout);
     }
 
+    public boolean isIsItYourTurn() {
+        return isItYourTurn.get();
+    }
+
+    public BooleanProperty isItYourTurnProperty() {
+        return isItYourTurn;
+    }
+
+    public void setIsItYourTurn(boolean isItYourTurn) {
+        this.isItYourTurn.set(isItYourTurn);
+    }
+
+    public boolean isGameRunning() {
+        return gameRunning.get();
+    }
+
+    public BooleanProperty gameRunningProperty() {
+        return gameRunning;
+    }
+
+    public void setGameRunning(boolean gameRunning) {
+        this.gameRunning.set(gameRunning);
+    }
 
 
+    public StringProperty isItYourTurnPrintOutProperty() {
+        return isItYourTurnPrintOut;
+    }
+
+    public void setIsItYourTurnPrintOut(String isItYourTurnPrintOut) {
+        this.isItYourTurnPrintOut.set(isItYourTurnPrintOut);
+    }
 }

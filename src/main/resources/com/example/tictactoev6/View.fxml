@@ -11,23 +11,19 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.canvas.Canvas?>
 <BorderPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.example.tictactoev6.Controller">
-    <Label fx:id="messageReceived"/>
-    <Button text="Go Online!" onAction="#goOnline"/>
-    <TextField fx:id="messageToSend" text="Write Something"/>
-    <Button fx:id="send" text="Send" userData=""/>
-
-
     <top>
         <VBox alignment="CENTER" maxHeight="150" minHeight="123.0" prefHeight="123.0" prefWidth="723.0">
             <Label style="-fx-font-size: 40px;" text="Tic Tac Toe Online!" textAlignment="CENTER" textFill="#4d3939" textOverrun="WORD_ELLIPSIS" />
             <Button onAction="#goOnline" text="Play Online?"/>
+            <Button onAction="#startServer" text="Start Server"/>
+
 
             <Label style="-fx-font-size: 20px;" text="You are the color blue!" textAlignment="CENTER" textFill="#4d3939" textOverrun="WORD_ELLIPSIS" />
+            <Label fx:id="isItYourTurn" />
 
         </VBox>
     </top>

@@ -4,13 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="14e132f8-3c40-40d3-b326-3654f1334b6e" name="Changes" comment="win messages + win count + compressed methods in model">
+    <list default="true" id="14e132f8-3c40-40d3-b326-3654f1334b6e" name="Changes" comment="sending resetRequest, need to set order">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/tictactoev6/Network/PlayerHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tictactoev6/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tictactoev6/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tictactoev6/FactoryMethods.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tictactoev6/FactoryMethods.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tictactoev6/GameLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tictactoev6/GameLogic.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tictactoev6/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tictactoev6/Model.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tictactoev6/Network/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tictactoev6/Network/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tictactoev6/Network/Client.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tictactoev6/Network/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tictactoev6/Network/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tictactoev6/Network/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tictactoev6/Network/Server.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/tictactoev6/View.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/tictactoev6/View.fxml" afterDir="false" />
     </list>
