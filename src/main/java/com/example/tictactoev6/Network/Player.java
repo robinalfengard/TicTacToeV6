@@ -67,12 +67,4 @@ public class Player {
             System.out.println("Error from closeAll method");
         }
     }
-
-
-
-
-
-
-
-
 }

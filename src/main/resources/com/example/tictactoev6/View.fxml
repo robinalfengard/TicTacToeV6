@@ -18,8 +18,8 @@
     <top>
         <VBox alignment="CENTER" maxHeight="150" minHeight="123.0" prefHeight="123.0" prefWidth="723.0">
             <Label style="-fx-font-size: 40px;" text="Tic Tac Toe Online!" textAlignment="CENTER" textFill="#4d3939" textOverrun="WORD_ELLIPSIS" />
-            <Button onAction="#goOnline" text="Play Online?"/>
-            <Button onAction="#startServer" text="Start Server"/>
+            <Button fx:id="haveJoinedButton" onAction="#goOnline" text="Play Online?" disable="${controller.model.haveJoined}"/>
+            <Button fx:id="startServerButton" onAction="#startServer" text="Start Server" disable="${controller.model.isServerRunning}"/>
             <Label fx:id="isItYourTurn" style="-fx-font-size: 15px;" />
         </VBox>
     </top>

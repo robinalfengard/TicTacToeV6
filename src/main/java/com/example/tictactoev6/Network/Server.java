@@ -23,11 +23,4 @@ public class Server {
             System.out.println("Error when trying to start server");
         }
     }
-
-
-
-
-
-
-
 }

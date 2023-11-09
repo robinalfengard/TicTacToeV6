@@ -8,6 +8,12 @@ public class GameLogic {
     FactoryMethods factoryMethods =  new FactoryMethods();
     private final List<String> userMoves = new ArrayList<>();
     private final List<String> opponentMoves = new ArrayList<>();
+    Model model;
+
+    public GameLogic(Model model) {
+        this.model = model;
+
+    }
 
     public boolean isMoveValid(String move, Map<String, Canvas> possibleMoves, List<String> copyOfMoves)  {
         String moveToTry = possibleMoves.get(move).getId();
@@ -22,6 +28,19 @@ public class GameLogic {
         return factoryMethods.winningCombinations().stream()
                 .anyMatch(movesToCheck::containsAll
                 );
+    }
+
+    public void isGameOver() {
+        if (winCheck(getOpponentMoves())) {
+            model.setGameRunning(false);
+            model.opponentWin();
+        } else if (winCheck(getUserMoves())) {
+            model.setGameRunning(false);
+            model.userWin();
+        } else if (model.getBoxMap().isEmpty()) {
+            model.setGameRunning(false);
+            model.tie();
+        }
     }
 
     public List<String> getUserMoves() {

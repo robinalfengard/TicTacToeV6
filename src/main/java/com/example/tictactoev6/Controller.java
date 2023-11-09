@@ -5,9 +5,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
@@ -29,6 +29,8 @@ public class Controller implements Initializable {
     public Label opponentScorePrintout;
     public Label yourScorePrintout;
     public Label isItYourTurn;
+    public Button startServerButton;
+    public Button haveJoinedButton;
     private Model model;
     Player player;
     Server server;
@@ -52,6 +54,12 @@ public class Controller implements Initializable {
         opponentScorePrintout.textProperty().bind(model.opponentScorePrintoutProperty());
         yourScorePrintout.textProperty().bind(model.userScorePrintoutProperty());
         isItYourTurn.textProperty().bind(model.isItYourTurnPrintOutProperty());
+        haveJoinedButton.disableProperty().bind(model.haveJoinedProperty());
+        startServerButton.disableProperty().bind(model.isServerRunningProperty());
+    }
+
+    public Model getModel() {
+        return model;
     }
 
 
@@ -59,6 +67,8 @@ public class Controller implements Initializable {
         try {
             player = new Player(model);
             player.listenForMessages();
+            model.setGameRunning(true);
+            model.setHaveJoined(true);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -91,5 +101,6 @@ public class Controller implements Initializable {
             server.startServer();
         });
         serverThread.start();
+        model.setIsServerRunning(true);
     }
 }

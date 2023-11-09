@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PlayerHandler  implements Runnable{
-    private static final List<PlayerHandler> players = new ArrayList<>();
+    public static final List<PlayerHandler> players = new ArrayList<>();
     private Socket socket;
     private BufferedReader bufferedReader;
     private BufferedWriter bufferedWriter;

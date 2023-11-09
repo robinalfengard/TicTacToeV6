@@ -11,25 +11,27 @@ import java.util.*;
 
 public class Model {
     //todo nice to haves:
-    // disable innan 2 players är connected,
-    // disable play online efter att två spelare är online,
     // disable startServer efter att den är gjord
-    GameLogic gameLogic = new GameLogic();
+
+    GameLogic gameLogic;
     FactoryMethods factoryMethods = new FactoryMethods();
     private  Map<String, Canvas> boxMap;
     private  List<String> availableMoves;
-    private final StringProperty winningMessageProperty = new SimpleStringProperty();
     private  int opponentScore = 0;
-    private final StringProperty opponentScorePrintout = new SimpleStringProperty("Opponent score: " + opponentScore);
     private  int userScore = 0;
+    private final StringProperty winningMessageProperty = new SimpleStringProperty("Waiting for other players to join");
+    private final StringProperty opponentScorePrintout = new SimpleStringProperty("Opponent score: " + opponentScore);
     private final StringProperty userScorePrintout = new SimpleStringProperty("Your score: " + userScore);
-    private final BooleanProperty isItYourTurn = new SimpleBooleanProperty(true);
     private final StringProperty isItYourTurnPrintOut = new SimpleStringProperty("");
-    private final BooleanProperty gameRunning = new SimpleBooleanProperty(true);
-
+    private final BooleanProperty isServerRunning = new SimpleBooleanProperty(false);
+    private final BooleanProperty haveJoined = new SimpleBooleanProperty(false);
+    private final BooleanProperty isItYourTurn = new SimpleBooleanProperty(true);
+    private final BooleanProperty gameRunning = new SimpleBooleanProperty(false);
 
     public Model(){
         availableMoves = factoryMethods.getAvailableMoves();
+        gameLogic = new GameLogic(this);
+
     }
 
 
@@ -46,7 +48,7 @@ public class Model {
                     System.out.println("Not valid");
                 }
                 if(isGameRunning())
-                    isGameOver();
+                    gameLogic.isGameOver();
             });
     }
 
@@ -61,38 +63,28 @@ public class Model {
             System.out.println("Is it your turn after opponent move: " + isIsItYourTurn());
         }
         if(isGameRunning())
-            isGameOver();
+            gameLogic.isGameOver();
         });
     }
 
-    public void isGameOver() {
-        if (gameLogic.winCheck(gameLogic.getOpponentMoves())) {
-            setGameRunning(false);
-            opponentWin();
-        } else if (gameLogic.winCheck(gameLogic.getUserMoves())) {
-            setGameRunning(false);
-            userWin();
-        } else if (boxMap.isEmpty()) {
-            setGameRunning(false);
-            setWinningMessage("It's a tie!");
-        }
-    }
-
-    private void userWin() {
+    public void userWin() {
         setWinningMessage("You won!");
         userScore += 1;
         setUserScorePrintout("Your score: " + userScore);
         disableAllMoves();
     }
 
-    private void opponentWin() {
+    public void opponentWin() {
         setWinningMessage("Opponent won!");
         opponentScore +=1;
         setOpponentScorePrintout("Opponent score: " + opponentScore);
         disableAllMoves();
     }
+    public void tie(){
+        setWinningMessage("It's a tie!");
+    }
 
-
+    // ok
     public void boxSelector(String id, Color color) {
         Canvas canvas = boxMap.get(id);
         if (canvas != null) {
@@ -119,7 +111,6 @@ public class Model {
         }
     }
 
-
     public void resetScore() {
         userScore = 0;
         opponentScore = 0;
@@ -145,6 +136,7 @@ public class Model {
         availableMoves = factoryMethods.getAvailableMoves();
         setGameRunning(true);
     }
+
 
 
 
@@ -191,9 +183,6 @@ public class Model {
         return gameRunning.get();
     }
 
-    public BooleanProperty gameRunningProperty() {
-        return gameRunning;
-    }
 
     public void setGameRunning(boolean gameRunning) {
         this.gameRunning.set(gameRunning);
@@ -206,5 +195,33 @@ public class Model {
 
     public void setIsItYourTurnPrintOut(String isItYourTurnPrintOut) {
         this.isItYourTurnPrintOut.set(isItYourTurnPrintOut);
+    }
+
+    public Map<String, Canvas> getBoxMap() {
+        return boxMap;
+    }
+
+    public boolean isIsServerRunning() {
+        return isServerRunning.get();
+    }
+
+    public BooleanProperty isServerRunningProperty() {
+        return isServerRunning;
+    }
+
+    public void setIsServerRunning(boolean isServerRunning) {
+        this.isServerRunning.set(isServerRunning);
+    }
+
+    public boolean isHaveJoined() {
+        return haveJoined.get();
+    }
+
+    public BooleanProperty haveJoinedProperty() {
+        return haveJoined;
+    }
+
+    public void setHaveJoined(boolean haveJoined) {
+        this.haveJoined.set(haveJoined);
     }
 }
