@@ -5,9 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
@@ -17,12 +15,6 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
-    @FXML
-    public Label messageReceived;
-    @FXML
-    public Button send;
-    @FXML
-    public TextField messageToSend;
     @FXML
     public Canvas box1;
     public Canvas box2;
@@ -60,12 +52,8 @@ public class Controller implements Initializable {
         opponentScorePrintout.textProperty().bind(model.opponentScorePrintoutProperty());
         yourScorePrintout.textProperty().bind(model.userScorePrintoutProperty());
         isItYourTurn.textProperty().bind(model.isItYourTurnPrintOutProperty());
-
     }
 
-    public Model getModel(){
-        return model;
-    }
 
     public void goOnline(ActionEvent actionEvent) {
         try {

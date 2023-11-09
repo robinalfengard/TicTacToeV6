@@ -1,6 +1,5 @@
 package com.example.tictactoev6;
 import javafx.scene.canvas.Canvas;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -23,13 +22,6 @@ public class GameLogic {
         return factoryMethods.winningCombinations().stream()
                 .anyMatch(movesToCheck::containsAll
                 );
-    }
-
-
-
-
-    public FactoryMethods getFactoryMethods() {
-        return factoryMethods;
     }
 
     public List<String> getUserMoves() {

@@ -23,11 +23,9 @@ public class PlayerHandler  implements Runnable{
         }
     }
 
-
     @Override
     public void run() {
         String moveFromPlayer;
-        //Listener
         while (true) {
             try {
                 moveFromPlayer = bufferedReader.readLine();
@@ -38,7 +36,6 @@ public class PlayerHandler  implements Runnable{
             }
         }
     }
-
 
     public void noticeLatestMove(String moveFromPlayer) {
         for (PlayerHandler player : players) {
@@ -63,8 +60,7 @@ public class PlayerHandler  implements Runnable{
                 socket.close();
             }
         } catch (IOException ex){
-            ex.printStackTrace();
+            System.out.println("Error from closeAll");
         }
     }
-
 }

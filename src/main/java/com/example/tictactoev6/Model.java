@@ -1,5 +1,4 @@
 package com.example.tictactoev6;
-import com.example.tictactoev6.Network.PlayerHandler;
 import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -11,7 +10,10 @@ import javafx.scene.paint.Color;
 import java.util.*;
 
 public class Model {
-    //todo visa vems tur det är, userWin blir just nu +2
+    //todo nice to haves:
+    // disable innan 2 players är connected,
+    // disable play online efter att två spelare är online,
+    // disable startServer efter att den är gjord
     GameLogic gameLogic = new GameLogic();
     FactoryMethods factoryMethods = new FactoryMethods();
     private  Map<String, Canvas> boxMap;
@@ -21,7 +23,7 @@ public class Model {
     private final StringProperty opponentScorePrintout = new SimpleStringProperty("Opponent score: " + opponentScore);
     private  int userScore = 0;
     private final StringProperty userScorePrintout = new SimpleStringProperty("Your score: " + userScore);
-    private BooleanProperty isItYourTurn = new SimpleBooleanProperty(true);
+    private final BooleanProperty isItYourTurn = new SimpleBooleanProperty(true);
     private final StringProperty isItYourTurnPrintOut = new SimpleStringProperty("");
     private final BooleanProperty gameRunning = new SimpleBooleanProperty(true);
 
@@ -38,12 +40,13 @@ public class Model {
                     gameLogic.getUserMoves().add(boxId);
                     gameLogic.removeMove(boxId, availableMoves);
                     setIsItYourTurn(false);
-                    setTurnText();
+                    updateTurnInfo();
                     System.out.println("Is it your turn after move: " + isIsItYourTurn());
                 } else{
                     System.out.println("Not valid");
                 }
-                isGameOver();
+                if(isGameRunning())
+                    isGameOver();
             });
     }
 
@@ -54,23 +57,24 @@ public class Model {
             gameLogic.getOpponentMoves().add(boxReceived);
             gameLogic.removeMove(boxReceived, availableMoves);
             setIsItYourTurn(true);
-            setTurnText();
+            updateTurnInfo();
             System.out.println("Is it your turn after opponent move: " + isIsItYourTurn());
         }
+        if(isGameRunning())
             isGameOver();
         });
     }
 
     public void isGameOver() {
         if (gameLogic.winCheck(gameLogic.getOpponentMoves())) {
+            setGameRunning(false);
             opponentWin();
-            setGameRunning(false);
         } else if (gameLogic.winCheck(gameLogic.getUserMoves())) {
+            setGameRunning(false);
             userWin();
-            setGameRunning(false);
         } else if (boxMap.isEmpty()) {
-            setWinningMessage("It's a tie!");
             setGameRunning(false);
+            setWinningMessage("It's a tie!");
         }
     }
 
@@ -107,7 +111,7 @@ public class Model {
         availableMoves.clear();
     }
 
-    private void setTurnText(){
+    private void updateTurnInfo(){
         if(isIsItYourTurn())
             setIsItYourTurnPrintOut("It is your turn");
         else{
@@ -158,20 +162,12 @@ public class Model {
         winningMessageProperty.set(message);
     }
 
-    public String getUserScorePrintout() {
-        return userScorePrintout.get();
-    }
-
     public StringProperty userScorePrintoutProperty() {
         return userScorePrintout;
     }
 
     public void setUserScorePrintout(String userScorePrintout) {
         this.userScorePrintout.set(userScorePrintout);
-    }
-
-    public String getOpponentScorePrintout() {
-        return opponentScorePrintout.get();
     }
 
     public StringProperty opponentScorePrintoutProperty() {
@@ -186,9 +182,6 @@ public class Model {
         return isItYourTurn.get();
     }
 
-    public BooleanProperty isItYourTurnProperty() {
-        return isItYourTurn;
-    }
 
     public void setIsItYourTurn(boolean isItYourTurn) {
         this.isItYourTurn.set(isItYourTurn);

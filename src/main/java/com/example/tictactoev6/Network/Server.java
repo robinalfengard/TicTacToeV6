@@ -20,7 +20,7 @@ public class Server {
                 thread.start();
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Error when trying to start server");
         }
     }
 

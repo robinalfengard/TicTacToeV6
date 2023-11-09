@@ -5,9 +5,9 @@ import java.io.*;
 import java.net.Socket;
 
 public class Player {
-    private BufferedWriter bufferedWriter;
-    private BufferedReader bufferedReader;
-    private Socket socket;
+    private final BufferedWriter bufferedWriter;
+    private final BufferedReader bufferedReader;
+    private final Socket socket;
     private final Model model;
     public Player(Model model) throws IOException {
         socket = new Socket("localhost", 6000);
@@ -32,27 +32,24 @@ public class Player {
 
 
     public void listenForMessages(){
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                String incommingMessage;
-                while(socket.isConnected()){
-                    try{
-                        incommingMessage = bufferedReader.readLine();
-                        if(incommingMessage != null) {
-                            String messageToSend = incommingMessage;
-                            System.out.println("incoming message: " + incommingMessage);
-                            if (incommingMessage.equals("resetGameBoard")){
-                                Platform.runLater(model::resetGameBoard);
-                            } else if (incommingMessage.equals("resetScore")) {
-                                Platform.runLater(model::resetScore);
-                            } else{
-                                Platform.runLater(() -> model.makeOpponentMove(messageToSend));
-                            }
+        new Thread(() -> {
+            String incommingMessage;
+            while(socket.isConnected()){
+                try{
+                    incommingMessage = bufferedReader.readLine();
+                    if(incommingMessage != null) {
+                        String messageToSend = incommingMessage;
+                        System.out.println("incoming message: " + incommingMessage);
+                        if (incommingMessage.equals("resetGameBoard")){
+                            Platform.runLater(model::resetGameBoard);
+                        } else if (incommingMessage.equals("resetScore")) {
+                            Platform.runLater(model::resetScore);
+                        } else{
+                            Platform.runLater(() -> model.makeOpponentMove(messageToSend));
                         }
-                    } catch (IOException ex){
-                        closeAll(socket, bufferedReader, bufferedWriter);
                     }
+                } catch (IOException ex){
+                    closeAll(socket, bufferedReader, bufferedWriter);
                 }
             }
         }).start();
@@ -67,7 +64,6 @@ public class Player {
             if(socket != null)
                 socket.close();
         }catch (IOException e){
-            e.printStackTrace();
             System.out.println("Error from closeAll method");
         }
     }
