@@ -16,7 +16,6 @@ public class Model {
     GameLogic gameLogic;
     FactoryMethods factoryMethods = new FactoryMethods();
     private  Map<String, Canvas> boxMap;
-    private  List<String> availableMoves;
     private  int opponentScore = 0;
     private  int userScore = 0;
     private final StringProperty winningMessageProperty = new SimpleStringProperty("Waiting for other players to join");
@@ -29,18 +28,17 @@ public class Model {
     private final BooleanProperty gameRunning = new SimpleBooleanProperty(false);
 
     public Model(){
-        availableMoves = factoryMethods.getAvailableMoves();
         gameLogic = new GameLogic(this);
-
+        gameLogic.initializeAvailableMoves();
     }
 
 
     public void makeMove(String boxId) {
             Platform.runLater(() -> {
-                if (gameLogic.isMoveValid(boxId, boxMap, availableMoves) && isIsItYourTurn()) {
+                if (gameLogic.isMoveValid(boxId, boxMap, gameLogic.getAvailableMoves()) && isIsItYourTurn()) {
                     boxSelector(boxId, Color.BLUE);
                     gameLogic.getUserMoves().add(boxId);
-                    gameLogic.removeMove(boxId, availableMoves);
+                    gameLogic.removeMove(boxId, gameLogic.getAvailableMoves());
                     setIsItYourTurn(false);
                     updateTurnInfo();
                     System.out.println("Is it your turn after move: " + isIsItYourTurn());
@@ -54,10 +52,10 @@ public class Model {
 
     public void makeOpponentMove(String boxReceived) {
         Platform.runLater(() -> {
-        if(gameLogic.isMoveValid(boxReceived, boxMap, availableMoves)) {
+        if(gameLogic.isMoveValid(boxReceived, boxMap, gameLogic.getAvailableMoves())) {
             boxSelector(boxReceived, Color.RED);
             gameLogic.getOpponentMoves().add(boxReceived);
-            gameLogic.removeMove(boxReceived, availableMoves);
+            gameLogic.removeMove(boxReceived, gameLogic.getAvailableMoves());
             setIsItYourTurn(true);
             updateTurnInfo();
             System.out.println("Is it your turn after opponent move: " + isIsItYourTurn());
@@ -100,7 +98,7 @@ public class Model {
     }
 
     private void disableAllMoves() {
-        availableMoves.clear();
+        gameLogic.getAvailableMoves().clear();
     }
 
     private void updateTurnInfo(){
@@ -133,7 +131,7 @@ public class Model {
         });
         gameLogic.getUserMoves().clear();
         gameLogic.getOpponentMoves().clear();
-        availableMoves = factoryMethods.getAvailableMoves();
+        gameLogic.initializeAvailableMoves();
         setGameRunning(true);
     }
 

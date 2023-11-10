@@ -8,11 +8,15 @@ public class GameLogic {
     FactoryMethods factoryMethods =  new FactoryMethods();
     private final List<String> userMoves = new ArrayList<>();
     private final List<String> opponentMoves = new ArrayList<>();
+    private List<String> availableMoves;
     Model model;
 
     public GameLogic(Model model) {
         this.model = model;
+    }
 
+    public void initializeAvailableMoves() {
+        availableMoves = factoryMethods.getAvailableMoves();
     }
 
     public boolean isMoveValid(String move, Map<String, Canvas> possibleMoves, List<String> copyOfMoves)  {
@@ -49,5 +53,9 @@ public class GameLogic {
 
     public List<String> getOpponentMoves() {
         return opponentMoves;
+    }
+
+    public List<String> getAvailableMoves() {
+        return availableMoves;
     }
 }
