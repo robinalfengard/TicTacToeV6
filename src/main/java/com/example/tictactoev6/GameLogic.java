@@ -10,6 +10,7 @@ public class GameLogic {
     private final List<String> opponentMoves = new ArrayList<>();
     private List<String> availableMoves;
     Model model;
+    private Map<String, Canvas> boxmap;
 
     public GameLogic(Model model) {
         this.model = model;
@@ -19,8 +20,8 @@ public class GameLogic {
         availableMoves = factoryMethods.getAvailableMoves();
     }
 
-    public boolean isMoveValid(String move, Map<String, Canvas> possibleMoves, List<String> copyOfMoves)  {
-        String moveToTry = possibleMoves.get(move).getId();
+    public boolean isMoveValid(String move,  List<String> copyOfMoves)  {
+        String moveToTry = boxmap.get(move).getId();
         return copyOfMoves.contains(moveToTry);
     }
 
@@ -41,7 +42,7 @@ public class GameLogic {
         } else if (winCheck(getUserMoves())) {
             model.setGameRunning(false);
             model.userWin();
-        } else if (model.getBoxMap().isEmpty()) {
+        } else if (boxmap.isEmpty()) {
             model.setGameRunning(false);
             model.tie();
         }
@@ -57,5 +58,13 @@ public class GameLogic {
 
     public List<String> getAvailableMoves() {
         return availableMoves;
+    }
+
+    public void setBoxMap(Map<String, Canvas> boxMap) {
+        this.boxmap = boxMap;
+    }
+
+    public Map<String, Canvas> getBoxmap() {
+        return boxmap;
     }
 }

@@ -48,7 +48,8 @@ public class Controller implements Initializable {
         boxMap.put("box7", box7);
         boxMap.put("box8", box8);
         boxMap.put("box9", box9);
-        model.setBoxMap(boxMap);
+       // model.setBoxMap(boxMap);
+        model.gameLogic.setBoxMap(boxMap);
         winningMessage.textProperty().bind(model.winningMessageProperty());
         opponentScorePrintout.textProperty().bind(model.opponentScorePrintoutProperty());
         yourScorePrintout.textProperty().bind(model.userScorePrintoutProperty());

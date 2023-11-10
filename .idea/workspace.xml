@@ -4,8 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="14e132f8-3c40-40d3-b326-3654f1334b6e" name="Changes" comment="fixed bug with doubled points given">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="14e132f8-3c40-40d3-b326-3654f1334b6e" name="Changes" comment="separated available moves">
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tictactoev6/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tictactoev6/Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tictactoev6/GameLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tictactoev6/GameLogic.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/tictactoev6/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/tictactoev6/Model.java" afterDir="false" />
@@ -182,7 +181,14 @@
       <option name="presentableId" value="LOCAL−00007" />
       <updated>1699561574109</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL−00008" summary="separated available moves">
+      <option name="closed" value="true" />
+      <created>1699607184915</created>
+      <option name="number" value="LOCAL−00008" />
+      <option name="presentableId" value="LOCAL−00008" />
+      <updated>1699607184915</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -193,7 +199,8 @@
     <MESSAGE value="turn based now works" />
     <MESSAGE value="updated view - player/opponent turn now show" />
     <MESSAGE value="fixed bug with doubled points given" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed bug with doubled points given" />
+    <MESSAGE value="separated available moves" />
+    <option name="LAST_COMMIT_MESSAGE" value="separated available moves" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/TicTacToeV6$App.ic" NAME="App Coverage Results" MODIFIED="1699196787880" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

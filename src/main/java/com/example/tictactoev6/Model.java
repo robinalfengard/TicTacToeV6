@@ -15,7 +15,6 @@ public class Model {
 
     GameLogic gameLogic;
     FactoryMethods factoryMethods = new FactoryMethods();
-    private  Map<String, Canvas> boxMap;
     private  int opponentScore = 0;
     private  int userScore = 0;
     private final StringProperty winningMessageProperty = new SimpleStringProperty("Waiting for other players to join");
@@ -35,7 +34,7 @@ public class Model {
 
     public void makeMove(String boxId) {
             Platform.runLater(() -> {
-                if (gameLogic.isMoveValid(boxId, boxMap, gameLogic.getAvailableMoves()) && isIsItYourTurn()) {
+                if (gameLogic.isMoveValid(boxId, gameLogic.getAvailableMoves()) && isIsItYourTurn()) {
                     boxSelector(boxId, Color.BLUE);
                     gameLogic.getUserMoves().add(boxId);
                     gameLogic.removeMove(boxId, gameLogic.getAvailableMoves());
@@ -52,7 +51,7 @@ public class Model {
 
     public void makeOpponentMove(String boxReceived) {
         Platform.runLater(() -> {
-        if(gameLogic.isMoveValid(boxReceived, boxMap, gameLogic.getAvailableMoves())) {
+        if(gameLogic.isMoveValid(boxReceived, gameLogic.getAvailableMoves())) {
             boxSelector(boxReceived, Color.RED);
             gameLogic.getOpponentMoves().add(boxReceived);
             gameLogic.removeMove(boxReceived, gameLogic.getAvailableMoves());
@@ -84,7 +83,7 @@ public class Model {
 
     // ok
     public void boxSelector(String id, Color color) {
-        Canvas canvas = boxMap.get(id);
+        Canvas canvas = gameLogic.getBoxmap().get(id);
         if (canvas != null) {
             Platform.runLater(() -> {
                 GraphicsContext gc = canvas.getGraphicsContext2D();
@@ -120,7 +119,7 @@ public class Model {
 
     public void resetGameBoard() {
         Platform.runLater(() -> {
-            boxMap.forEach((box, canvas) -> {
+            gameLogic.getBoxmap().forEach((box, canvas) -> {
                 GraphicsContext gc = canvas.getGraphicsContext2D();
                 gc.setFill(Color.WHITE);
                 gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
@@ -140,9 +139,7 @@ public class Model {
 
     // GETTER AND SETTER
 
-    public void setBoxMap(Map<String, Canvas> boxMap) {
-        this.boxMap = boxMap;
-    }
+
 
     public StringProperty winningMessageProperty() {
         return winningMessageProperty;
@@ -195,9 +192,7 @@ public class Model {
         this.isItYourTurnPrintOut.set(isItYourTurnPrintOut);
     }
 
-    public Map<String, Canvas> getBoxMap() {
-        return boxMap;
-    }
+
 
     public boolean isIsServerRunning() {
         return isServerRunning.get();
