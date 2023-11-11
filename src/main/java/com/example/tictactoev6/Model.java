@@ -7,14 +7,10 @@ import javafx.beans.property.StringProperty;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-import java.util.*;
-
 public class Model {
     //todo nice to haves:
     // disable startServer efter att den är gjord
-
     GameLogic gameLogic;
-    FactoryMethods factoryMethods = new FactoryMethods();
     private  int opponentScore = 0;
     private  int userScore = 0;
     private final StringProperty winningMessageProperty = new SimpleStringProperty("Waiting for other players to join");
@@ -34,15 +30,14 @@ public class Model {
 
     public void makeMove(String boxId) {
             Platform.runLater(() -> {
-                if (gameLogic.isMoveValid(boxId, gameLogic.getAvailableMoves()) && isIsItYourTurn()) {
+                if (gameLogic.isMoveValid(boxId) && isIsItYourTurn()) {
                     boxSelector(boxId, Color.BLUE);
                     gameLogic.getUserMoves().add(boxId);
-                    gameLogic.removeMove(boxId, gameLogic.getAvailableMoves());
+                    gameLogic.getAvailableMoves().remove(boxId);
                     setIsItYourTurn(false);
                     updateTurnInfo();
-                    System.out.println("Is it your turn after move: " + isIsItYourTurn());
                 } else{
-                    System.out.println("Not valid");
+                    setWinningMessage("Not a valid move");
                 }
                 if(isGameRunning())
                     gameLogic.isGameOver();
@@ -51,13 +46,12 @@ public class Model {
 
     public void makeOpponentMove(String boxReceived) {
         Platform.runLater(() -> {
-        if(gameLogic.isMoveValid(boxReceived, gameLogic.getAvailableMoves())) {
+        if(gameLogic.isMoveValid(boxReceived)) {
             boxSelector(boxReceived, Color.RED);
             gameLogic.getOpponentMoves().add(boxReceived);
-            gameLogic.removeMove(boxReceived, gameLogic.getAvailableMoves());
+            gameLogic.getAvailableMoves().remove(boxReceived);
             setIsItYourTurn(true);
             updateTurnInfo();
-            System.out.println("Is it your turn after opponent move: " + isIsItYourTurn());
         }
         if(isGameRunning())
             gameLogic.isGameOver();
@@ -81,7 +75,6 @@ public class Model {
         setWinningMessage("It's a tie!");
     }
 
-    // ok
     public void boxSelector(String id, Color color) {
         Canvas canvas = gameLogic.getBoxmap().get(id);
         if (canvas != null) {
@@ -131,16 +124,11 @@ public class Model {
         gameLogic.getUserMoves().clear();
         gameLogic.getOpponentMoves().clear();
         gameLogic.initializeAvailableMoves();
+        setWinningMessage("No Winner Yet");
         setGameRunning(true);
     }
 
-
-
-
     // GETTER AND SETTER
-
-
-
     public StringProperty winningMessageProperty() {
         return winningMessageProperty;
     }

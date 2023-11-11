@@ -6,16 +6,18 @@ import java.net.Socket;
 public class Server {
     private ServerSocket serverSocket;
     private final int PORT = 6000;
+    private int numberOfPlayers;
 
 
     public void startServer() {
         try {
             serverSocket = new ServerSocket(PORT);
             System.out.println("Waiting for players to connect...");
-            while (true){
+            while (numberOfPlayers<2){
                 Socket socket = serverSocket.accept();
                 System.out.println("Player connected");
                 PlayerHandler ph = new PlayerHandler(socket);
+                numberOfPlayers++;
                 Thread thread = new Thread(ph);
                 thread.start();
             }

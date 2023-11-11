@@ -23,7 +23,6 @@ public class Player {
                 bufferedWriter.write(message);
                 bufferedWriter.newLine();
                 bufferedWriter.flush();
-                System.out.println(model.isIsItYourTurn());
             }
         }catch (IOException ex){
             closeAll(socket, bufferedReader, bufferedWriter);
@@ -39,7 +38,6 @@ public class Player {
                     incommingMessage = bufferedReader.readLine();
                     if(incommingMessage != null) {
                         String messageToSend = incommingMessage;
-                        System.out.println("incoming message: " + incommingMessage);
                         if (incommingMessage.equals("resetGameBoard")){
                             Platform.runLater(model::resetGameBoard);
                         } else if (incommingMessage.equals("resetScore")) {

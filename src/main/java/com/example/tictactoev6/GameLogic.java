@@ -9,8 +9,9 @@ public class GameLogic {
     private final List<String> userMoves = new ArrayList<>();
     private final List<String> opponentMoves = new ArrayList<>();
     private List<String> availableMoves;
-    Model model;
     private Map<String, Canvas> boxmap;
+    Model model;
+
 
     public GameLogic(Model model) {
         this.model = model;
@@ -20,14 +21,11 @@ public class GameLogic {
         availableMoves = factoryMethods.getAvailableMoves();
     }
 
-    public boolean isMoveValid(String move,  List<String> copyOfMoves)  {
+    public boolean isMoveValid(String move)  {
         String moveToTry = boxmap.get(move).getId();
-        return copyOfMoves.contains(moveToTry);
+        return availableMoves.contains(moveToTry);
     }
 
-    public void removeMove(String move, List<String> availableMoves){
-        availableMoves.remove(move);
-    }
 
     public boolean winCheck(List<String> movesToCheck) {
         return factoryMethods.winningCombinations().stream()
@@ -42,7 +40,7 @@ public class GameLogic {
         } else if (winCheck(getUserMoves())) {
             model.setGameRunning(false);
             model.userWin();
-        } else if (boxmap.isEmpty()) {
+        } else if (availableMoves.isEmpty()) {
             model.setGameRunning(false);
             model.tie();
         }
